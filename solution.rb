@@ -3,19 +3,18 @@
 require_relative 'common'
 
 def count_stdin(input)
-  three_word_combinations = {}
+  three_word_combinations = {} #map used for counting 3 word combos:counter
 
-  # Iterate through input streams and get three word combinations
-  # input.each { |stream|
+  # Iterate each line and parse three word combinations
   input.each_line.lazy.each { |stream|
-    words = words_from_string(stream)
-    parsed_phrases = phrases(words, 3)
+    array = words_from_string(stream)
 
-    parsed_phrases.each { |phrase|
-      # Update variable to add to sum total or set initially to 1
+    parsed_phrases = phrases(array, 3) #get enumerator of all 3 word combos
+
+    parsed_phrases.each { |phrase| #scan the array of 3word combos
       if three_word_combinations.include?(phrase)
         three_word_combinations[phrase] += 1
-      else
+      else  #if key (3 word combo) has not been encountered create it
         three_word_combinations[phrase] = 1
       end
     }
@@ -27,6 +26,6 @@ def count_stdin(input)
   }
 end
 
-# ---- input ---
+# ---- entry point ---
 input = ARGF.read
 count_stdin(input)
