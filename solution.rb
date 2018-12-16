@@ -21,9 +21,12 @@ def count_stdin(input)
   }
 
   # Sort phrase combinations and totals descending, show only first 100
-  three_word_combinations.sort {|a1, a2| a2[1] <=> a1[1] }.first(100).each { |phrase, total|
-    puts "#{total} - #{phrase}"
+  # sorted = three_word_combinations.sort{|x,y| y <=> x} #reverse 3word:count => count:3word
+  sorted = three_word_combinations.sort_by{ |combo| combo[1]}.last(100)
+  sorted.each {|phrase, count|
+    puts "#{count} #{phrase}"
   }
+
 end
 
 # ---- entry point ---
