@@ -4,12 +4,12 @@ require_relative '../common'
 
 
 class TestCommonBenchmark < Minitest::Benchmark
-  def bench_words_from_stream
-    stream = File.open(File.join(BASE_DIR, 'test/origin-of-species.txt'))
-    parsed_words = words_from_stream(stream)
+  def bench_count_stdin
+    stream = IO.read(File.join(BASE_DIR, 'test/origin-of-species.txt'))
+    counted = count_stdin(stream)
 
-    assert_performance_constant do |n| # n is a range value
-      parsed_words[n]
+    assert_performance_constant do |n|
+      counted[n]
     end
   end
 end
